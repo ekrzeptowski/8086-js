@@ -1,3 +1,7 @@
+body {
+    display: flex;
+}
+
 .flex {
     display: flex;
 }
@@ -13,6 +17,17 @@
 
 #registers input {
     width: 32px;
+}
+
+.memory-container {
+    max-height: 400px;
+    overflow-y: scroll;
+}
+
+.memory-container thead {
+    position: sticky;
+    top: 0;
+    background: white;
 }
 
 .register-name {

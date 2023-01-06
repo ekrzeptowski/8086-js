@@ -35,8 +35,6 @@ function renderMemory() {
     const memoryTableBody = memoryTable.getElementsByTagName('tbody')[0];
     memoryTableBody.innerHTML = "";
     for (let address = 0; address < simulation.memory.size(); address += 0x10) {
-        // if (Number("0x"+address) % 0x10 === 0) {
-        // console.log("0x" + address.toString(16).toUpperCase());
         const memoryRow = document.createElement('tr');
         memoryRow.innerHTML = `
                 <th class="memory-address">0x${address.toString(16).toUpperCase().padStart(4, "0")}</th>
@@ -44,7 +42,6 @@ function renderMemory() {
             `;
         for (let i = 0; i < 0x10; i++) {
             const newAddress = address + i;
-            // console.log(i);
             memoryRow.innerHTML += `<td>${simulation.memory.data[newAddress].toString(16).toUpperCase().padStart(2, "0")}</td>`;
         }
         memoryTableBody.appendChild(memoryRow);
@@ -55,4 +52,5 @@ function renderMemory() {
 
 document.addEventListener("DOMContentLoaded", function () {
     renderRegisters();
+    renderMemory();
 });
