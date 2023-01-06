@@ -1,0 +1,20 @@
+.flex {
+    display: flex;
+}
+
+.monotype {
+    font-family: monospace;
+}
+
+/*#registers {*/
+/*    display: grid;*/
+/*    grid-template-columns: min-content 1fr 1fr;*/
+/*}*/
+
+#registers input {
+    width: 32px;
+}
+
+.register-name {
+    text-align: right;
+}
