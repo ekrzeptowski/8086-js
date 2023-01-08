@@ -50,7 +50,21 @@ function renderMemory() {
 
 }
 
+const commands = ["MOV", "XCHG", "ADD", "SUB", "MUL", "DIV", "INC", "DEC", "AND", "OR", "XOR", "NOT"];
+
+function renderCommands() {
+    const commandsSection = document.getElementsByClassName("commands-container")
+    commandsSection[0].innerHTML = "";
+    commands.forEach((command) => {
+        const commandSpan = document.createElement("span");
+        commandSpan.innerHTML = command + (command === commands[commands.length - 1] ? "" : " | ");
+        commandsSection[0].appendChild(commandSpan);
+    });
+}
+
+
 document.addEventListener("DOMContentLoaded", function () {
     renderRegisters();
     renderMemory();
+    renderCommands();
 });
