@@ -8,7 +8,11 @@ class Register {
     }
 
     set high(value) {
-        this.value = (value << 8) | (this.value & 0x00ff);
+        if (value > 0xff) {
+            alert("Register value out of range");
+        } else {
+            this.value = (value << 8) | (this.value & 0x00ff);
+        }
     }
 
     get low() {
@@ -34,8 +38,20 @@ class Memory {
     }
 
     set(address, value) {
-        console.log(address, value);
-        this.data[address] = value;
+        if (address < 0 || address > this.size()) {
+            alert("Invalid memory address");
+        }
+        if (value > 0xff) {
+            if (address === this.data.length - 1) {
+                alert("Invalid memory address");
+            } else if (value > 0xffff) {
+                alert("Invalid memory value");
+            }
+            this.data[address] = value & 0xff;
+            this.data[address + 1] = (value & 0xff00) >> 8;
+        } else {
+            this.data[address] = value;
+        }
     }
 
     size() {
