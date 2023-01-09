@@ -71,7 +71,6 @@ class Namespace {
 
     }
 
-
     set(address, value) {
         if (!address || !value) {
             console.log(address, value);
@@ -159,15 +158,3 @@ class CPU {
 }
 
 const simulation = new CPU();
-
-const flags = {
-    CF: 0,
-    PF: 0,
-    AF: 0,
-    ZF: 0,
-    SF: 0,
-    TF: 0,
-    IF: 0,
-    DF: 0,
-    OF: 0,
-};
