@@ -47,8 +47,8 @@ class Memory {
             } else if (value > 0xffff) {
                 alert("Invalid memory value");
             }
-            this.data[address] = value & 0xff;
-            this.data[address + 1] = (value & 0xff00) >> 8;
+            this.data[address + 1] = value & 0xff;
+            this.data[address] = (value & 0xff00) >> 8;
         } else {
             this.data[address] = value;
         }
