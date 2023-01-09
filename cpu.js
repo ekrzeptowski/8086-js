@@ -84,34 +84,47 @@ class Namespace {
         } else if (Number(address)) {
             return Number(address);
         }
-
     }
 
     set(address, value) {
-        if (!address || !value) {
+        if (!address || typeof value === "undefined") {
             console.log(address, value);
-            console.log("Invalid address or value");
+            alert("Invalid memory address or value");
             return null;
         }
         if (address.charAt(0) === "[") {
             console.log("set memory", address.slice(1, -1), value);
             this.memory.set(Number("0x" + address.slice(1, -1)), value);
             renderMemory();
-        } else if (address.charAt(1) === "X") {
-            console.log("set register", address, value);
-            this.registers[address].set(value);
-            renderRegisters();
-        } else if (address.charAt(1) === "H") {
-            console.log("set high", address, value);
-            this.registers[address.charAt(0) + "X"].high = value;
-            renderRegisters();
-        } else if (address.charAt(1) === "L") {
-            console.log("set low", address, value);
-            this.registers[address.charAt(0) + "X"].low = value;
+        } else if (/[A-D]/.test(address.charAt(0))) {
+            if (address.charAt(1) === "X") {
+                console.log("set register", address, value);
+                this.registers[address].set(value);
+            } else if (address.charAt(1) === "H") {
+                console.log("set high", address, value);
+                this.registers[address.charAt(0) + "X"].high = value;
+            } else if (address.charAt(1) === "L") {
+                console.log("set low", address, value);
+                this.registers[address.charAt(0) + "X"].low = value;
+            } else {
+                alert("Invalid address");
+            }
             renderRegisters();
         }
         console.log("set", address, value);
 
+    }
+
+    size(address) {
+        if (address.charAt(0) === "[") {
+            return 0xff;
+        } else if (/[A-D]/.test(address.charAt(0))) {
+            if (address.charAt(1) === "X") {
+                return 0xffff;
+            } else if (address.charAt(1) === "H" || address.charAt(1) === "L") {
+                return 0xff;
+            }
+        }
     }
 }
 
@@ -129,6 +142,16 @@ class CPU {
 
     compute(instruction, destination, source) {
         instruction = instruction.toUpperCase();
+        switch (instruction) {
+            case "XCHG":
+            case "AND":
+            case "OR":
+            case "XOR":
+                if (this.namespace.size(destination) !== this.namespace.size(source)) {
+                    alert("Invalid operand size");
+                    return null;
+                }
+        }
         switch (instruction) {
             case "MOV":
                 this.namespace.set(destination, this.namespace.get(source));
@@ -167,6 +190,9 @@ class CPU {
                 break;
             case "NOT":
                 this.namespace.set(destination, ~this.namespace.get(destination));
+                break;
+            default:
+                alert("Unrecognized instruction");
                 break;
         }
     }
