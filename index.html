@@ -56,6 +56,17 @@
     <div class="commands-container"></div>
 </section>
 
+<section id="execution">
+    <label>
+        Enter command in format: <code>command [argument1], [argument2]</code>
+        <input type="text" id="command" placeholder="Enter command">
+    </label>
+    <button id="execute">Execute</button>
+    <div>Argument can be: a number (binary eg. 0101b, decimal eg. 123, hexadecimal eg. 86h), register (eg.
+        <code>AH</code> or <code>BX</code>
+        ), memory in format <code>[0ABC]</code></div>
+</section>
+
 
 <script src="ui.js"></script>
 </body>

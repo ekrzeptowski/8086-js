@@ -61,8 +61,16 @@ class Namespace {
             return this.registers[address.charAt(0) + "X"].high;
         } else if (address.charAt(1) === "L") {
             return this.registers[address.charAt(0) + "X"].low;
+        } else if (address.charAt(address.length - 1) === "b") {
+            return Number("0b" + address.slice(0, -1));
+        } else if (address.charAt(address.length - 1) === "h") {
+            return Number("0x" + address.slice(0, -1));
+        } else if (Number(address)) {
+            return Number(address);
         }
+
     }
+
 
     set(address, value) {
         if (!address || !value) {
@@ -73,15 +81,19 @@ class Namespace {
         if (address.charAt(0) === "[") {
             console.log("set memory", address.slice(1, -1), value);
             this.memory.set(Number("0x" + address.slice(1, -1)), value);
+            renderMemory();
         } else if (address.charAt(1) === "X") {
             console.log("set register", address, value);
             this.registers[address].set(value);
+            renderRegisters();
         } else if (address.charAt(1) === "H") {
             console.log("set high", address, value);
             this.registers[address.charAt(0) + "X"].high = value;
+            renderRegisters();
         } else if (address.charAt(1) === "L") {
             console.log("set low", address, value);
             this.registers[address.charAt(0) + "X"].low = value;
+            renderRegisters();
         }
         console.log("set", address, value);
 

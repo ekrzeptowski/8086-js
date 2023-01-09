@@ -62,9 +62,26 @@ function renderCommands() {
     });
 }
 
+function executeCommand() {
+    const command = document.getElementById("command").value;
+    const commandParts = command.split(/\s(.*)/s);
+    const commandName = commandParts[0];
+    const commandArgs = commandParts[1];
+
+    const destination = commandArgs.split(",")[0].trim();
+    const source = commandArgs.split(",")[1]?.trim() || null;
+
+    simulation.compute(commandName, destination, source);
+}
 
 document.addEventListener("DOMContentLoaded", function () {
     renderRegisters();
     renderMemory();
     renderCommands();
+    document.getElementById("command").addEventListener("keydown", (event) => {
+        if (event.key === "Enter") {
+            executeCommand();
+        }
+    });
+    document.getElementById("execute").addEventListener("click", executeCommand);
 });
