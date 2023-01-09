@@ -113,6 +113,7 @@ class CPU {
     }
 
     compute(instruction, destination, source) {
+        instruction = instruction.toUpperCase();
         switch (instruction) {
             case "MOV":
                 this.namespace.set(destination, this.namespace.get(source));
