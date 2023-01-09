@@ -16,7 +16,7 @@ class Register {
     }
 
     set low(value) {
-        this.value = (this.value & 0xff00) | value;
+        this.value = (this.value & 0xff00) | (value & 0x00ff);
     }
 
     get() {
