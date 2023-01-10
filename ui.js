@@ -1,5 +1,10 @@
 function updateRegister(event, register, byte) {
     console.log(register, byte, event.target.value);
+    if (!/^[0-9a-fA-F]+$/.test(event.target.value)) {
+        alert("Invalid value");
+        renderRegisters();
+        return;
+    }
     // registers[register] = Number("0x" + event.target.value);
     switch (byte) {
         case 'H':

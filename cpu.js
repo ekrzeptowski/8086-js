@@ -10,6 +10,7 @@ class Register {
     set high(value) {
         if (value > 0xff) {
             alert("Register value out of range");
+            renderRegisters();
         } else {
             this.value = (value << 8) | (this.value & 0x00ff);
         }
@@ -20,7 +21,12 @@ class Register {
     }
 
     set low(value) {
-        this.value = (this.value & 0xff00) | (value & 0x00ff);
+        if (value > 0xff) {
+            alert("Register value out of range");
+            renderRegisters();
+        } else {
+            this.value = (this.value & 0xff00) | (value & 0x00ff);
+        }
     }
 
     get() {
@@ -71,18 +77,23 @@ class Namespace {
         }
         if (address.charAt(0) === "[") {
             return this.memory.data[Number("0x" + address.slice(1, -1))];
-        } else if (address.charAt(1) === "X") {
-            return this.registers[address].get();
-        } else if (address.charAt(1) === "H") {
-            return this.registers[address.charAt(0) + "X"].high;
-        } else if (address.charAt(1) === "L") {
-            return this.registers[address.charAt(0) + "X"].low;
+        } else if (address.length === 2) {
+            if (address.charAt(1) === "X") {
+                return this.registers[address].get();
+            } else if (address.charAt(1) === "H") {
+                return this.registers[address.charAt(0) + "X"].high;
+            } else if (address.charAt(1) === "L") {
+                return this.registers[address.charAt(0) + "X"].low;
+            }
         } else if (address.charAt(address.length - 1) === "b") {
             return Number("0b" + address.slice(0, -1));
         } else if (address.charAt(address.length - 1) === "h") {
             return Number("0x" + address.slice(0, -1));
         } else if (Number(address)) {
             return Number(address);
+        } else {
+            alert("Invalid operand");
+            return null;
         }
     }
 
