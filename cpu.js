@@ -153,6 +153,11 @@ class CPU {
 
     compute(instruction, destination, source) {
         instruction = instruction.toUpperCase();
+        if (destination.charAt(0) === "[" && destination.charAt(destination.length - 1) === "]" && source.charAt(0) === "[" && source.charAt(source.length - 1) === "]") {
+            alert("Cannot perform memory to memory operations");
+            return;
+        }
+
         switch (instruction) {
             case "XCHG":
             case "AND":
