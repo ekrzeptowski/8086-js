@@ -7,65 +7,73 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<section>
-    <h2>Registers:</h2>
-    <table id="registers" class="monotype">
-        <thead>
-        <tr>
-            <th>Register</th>
-            <td>H</td>
-            <td>L</td>
-        </tr>
-        </thead>
-        <tbody></tbody>
-    </table>
-</section>
-
-<section>
-    <h2>Memory:</h2>
-    <div class="flex memory-container">
-        <table id="memory" class="monotype">
+<div>
+    <section>
+        <h2>Registers:</h2>
+        <table id="registers" class="monotype">
             <thead>
             <tr>
-                <th>Address</th>
-                <th>00</th>
-                <th>01</th>
-                <th>02</th>
-                <th>03</th>
-                <th>04</th>
-                <th>05</th>
-                <th>06</th>
-                <th>07</th>
-                <th>08</th>
-                <th>09</th>
-                <th>0A</th>
-                <th>0B</th>
-                <th>0C</th>
-                <th>0D</th>
-                <th>0E</th>
-                <th>0F</th>
+                <th>Register</th>
+                <td>H</td>
+                <td>L</td>
             </tr>
             </thead>
             <tbody></tbody>
         </table>
+    </section>
 
-    </div>
-</section>
-<section id="commands">
-    <h2>Available commands:</h2>
-    <div class="commands-container"></div>
-</section>
+    <section>
+        <h2>Memory:</h2>
+        <div class="flex memory-container">
+            <table id="memory" class="monotype">
+                <thead>
+                <tr>
+                    <th>Address</th>
+                    <th>00</th>
+                    <th>01</th>
+                    <th>02</th>
+                    <th>03</th>
+                    <th>04</th>
+                    <th>05</th>
+                    <th>06</th>
+                    <th>07</th>
+                    <th>08</th>
+                    <th>09</th>
+                    <th>0A</th>
+                    <th>0B</th>
+                    <th>0C</th>
+                    <th>0D</th>
+                    <th>0E</th>
+                    <th>0F</th>
+                </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
 
-<section id="execution">
-    <label>
-        Enter command in format: <code>command [argument1], [argument2]</code>
-        <input type="text" id="command" placeholder="Enter command">
-    </label>
-    <button id="execute">Execute</button>
-    <div>Argument can be: a number (binary eg. 0101b, decimal eg. 123, hexadecimal eg. 86h), register (eg.
-        <code>AH</code> or <code>BX</code>
-        ), memory in format <code>[0ABC]</code></div>
-</section>
+        </div>
+    </section>
+</div>
+<div class="flex-column max-w-500">
+    <section id="commands" class="marginb-20">
+        <h2>Available commands:</h2>
+        <div class="commands-container"></div>
+    </section>
+
+    <section id="execution">
+        <label for="command">
+            Enter command in format: <code>command [argument1], [argument2]</code>
+        </label>
+        <div>
+            <input type="text" id="command" placeholder="Enter command">
+            <button id="execute">Execute</button>
+        </div>
+
+        <div class="marginy-10">Argument can be: a number (binary eg. 0101b, decimal eg. 123, hexadecimal eg. 86h),
+            register (eg.
+            <code>AH</code> or <code>BX</code>
+            ), memory in format <code>[0ABC]</code></div>
+    </section>
+</div>
 
 
 <script src="ui.js"></script>

@@ -1,9 +1,34 @@
 body {
     display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+body > div {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .flex {
     display: flex;
+}
+
+.flex-column {
+    flex-direction: column;
+}
+
+.max-w-500 {
+    max-width: 500px;
+}
+
+.marginy-10 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.marginb-20 {
+    margin-bottom: 20px;
 }
 
 .monotype {
