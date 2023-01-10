@@ -10,7 +10,7 @@ class Register {
     set high(value) {
         if (value > 0xff) {
             alert("Register value out of range");
-            renderRegisters();
+            typeof renderRegisters !== "undefined" && renderRegisters();
         } else {
             this.value = (value << 8) | (this.value & 0x00ff);
         }
@@ -23,7 +23,7 @@ class Register {
     set low(value) {
         if (value > 0xff) {
             alert("Register value out of range");
-            renderRegisters();
+            typeof renderRegisters !== "undefined" && renderRegisters();
         } else {
             this.value = (this.value & 0xff00) | (value & 0x00ff);
         }
@@ -106,7 +106,7 @@ class Namespace {
         if (address.charAt(0) === "[") {
             console.log("set memory", address.slice(1, -1), value);
             this.memory.set(Number("0x" + address.slice(1, -1)), value);
-            renderMemory();
+            typeof renderMemory !== "undefined" && renderMemory();
         } else if (/[A-D]/.test(address.charAt(0))) {
             if (address.charAt(1) === "X") {
                 console.log("set register", address, value);
@@ -120,7 +120,7 @@ class Namespace {
             } else {
                 alert("Invalid address");
             }
-            renderRegisters();
+            typeof renderRegisters !== "undefined" && renderRegisters();
         }
         console.log("set", address, value);
 
